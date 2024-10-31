@@ -10,5 +10,9 @@ public class TodoController {
         String url = "https://jsonplaceholder.typicode.com/todos/" + todoId;
        return HttpClient.sendGETRequest(url);
     }
-    
+
+    public static String getToDos(int todoId) {
+        String url = "https://jsonplaceholder.typicode.com/todos/" + todoId;
+        return HttpClient.sendGETRequest(url);
+    }
 }
