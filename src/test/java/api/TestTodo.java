@@ -23,7 +23,6 @@ public class TestTodo {
 
         String response = TodoController.getToDos(1);
         int userid =JsonPath.read(response, "$.userId");
-
         Assert.assertEquals(userid,  1);
 
     }
