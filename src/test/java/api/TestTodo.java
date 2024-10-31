@@ -25,6 +25,5 @@ public class TestTodo {
         int userid =JsonPath.read(response, "$.userId");
         Assert.assertEquals(userid,  1);
 
-
     }
 }
