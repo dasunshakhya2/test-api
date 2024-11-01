@@ -1,20 +1,34 @@
 package controllers;
 
-import models.CustomResponse;
-import models.Result;
+import configs.Configurations;
+import core.HttpClient;
+import core.Response;
+import core.Result;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import models.ToDo;
-import utils.HttpClient;
 import utils.JsonParser;
 
+import java.util.List;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class TodoController {
 
 
-    public static Result<ToDo> getToDoById(int todoId) {
-        String url = "https://jsonplaceholder.typicode.com/todos/" + todoId;
-        CustomResponse r = HttpClient.sendGETRequest(url);
+    public static Response<ToDo> getToDoById(int todoId) {
+        String url = Configurations.BASE_URL + "/todos/" + todoId;
+        Result result = HttpClient.sendGetRequest(url);
+        ToDo toDo = JsonParser.convertJsonStringToObject(ToDo.class, result.getResBody());
 
-        ToDo toDo = JsonParser.convertJsonStringToObject(ToDo.class, r.getBody());
-        return new Result<>(toDo, r.getStatusCode());
+        return new Response<>(toDo, result.getStatusCode());
+
+    }
+
+    public static Response<List<ToDo>> getToDos() {
+        String url = Configurations.BASE_URL + "/todos/";
+        Result result = HttpClient.sendGetRequest(url);
+        List<ToDo> toDoList = JsonParser.convertJsonStringToObjectList(ToDo.class, result.getResBody());
+        return new Response<>(toDoList, result.getStatusCode());
     }
 
 }
