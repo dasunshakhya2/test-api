@@ -1,17 +1,18 @@
 package api;
 
+import controllers.TodoController;
+import models.Result;
+import models.ToDo;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import com.jayway.jsonpath.JsonPath;
-import controllers.TodoController;
 
 
 public class TestTodo {
 
     @Test
     public void testGetPostById() {
-        String response = TodoController.getToDoById(1);
-        String title = JsonPath.read(response, "$.title");
-        Assert.assertEquals(title,  "delectus aut autem");
+        Result<ToDo> result = TodoController.getToDoById(1);
+        Assert.assertEquals(result.getStatusCode(), 200);
+        Assert.assertEquals(result.getData().getTitle(), "delectus aut autem");
     }
 }
