@@ -1,13 +1,14 @@
 package controllers;
 
 import configs.Configurations;
-import core.HttpClient;
-import core.Response;
-import core.Result;
+import core.httpclient.HttpClient;
+import core.httpclient.Response;
+import core.httpclient.Result;
+import core.json.JsonParser;
+import core.schema.SchemaValidator;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import models.ToDo;
-import utils.JsonParser;
 
 import java.util.List;
 
@@ -19,8 +20,8 @@ public class TodoController {
         String url = Configurations.BASE_URL + "/todos/" + todoId;
         Result result = HttpClient.sendGetRequest(url);
         ToDo toDo = JsonParser.convertJsonStringToObject(ToDo.class, result.getResBody());
-
-        return new Response<>(toDo, result.getStatusCode());
+        boolean isValidSchema = SchemaValidator.validateSchema(ToDo.class, result.getResBody(), false).isValid();
+        return new Response<>(toDo, result.getStatusCode(), isValidSchema);
 
     }
 
@@ -28,7 +29,8 @@ public class TodoController {
         String url = Configurations.BASE_URL + "/todos/";
         Result result = HttpClient.sendGetRequest(url);
         List<ToDo> toDoList = JsonParser.convertJsonStringToObjectList(ToDo.class, result.getResBody());
-        return new Response<>(toDoList, result.getStatusCode());
+        boolean isValidSchema = SchemaValidator.validateSchema(ToDo.class, result.getResBody(), true).isValid();
+        return new Response<>(toDoList, result.getStatusCode(), isValidSchema);
     }
 
 }

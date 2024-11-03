@@ -1,4 +1,4 @@
-package core;
+package core.httpclient;
 
 
 import lombok.AllArgsConstructor;
@@ -12,4 +12,5 @@ public class Response<T> {
 
     private T entity;
     private int statusCode;
+    private boolean isValidSchema;
 }

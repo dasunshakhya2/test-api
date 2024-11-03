@@ -1,4 +1,4 @@
-package utils;
+package core.json;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -21,5 +21,9 @@ public class JsonParser {
     public static <T> List<T> convertJsonStringToObjectList(Class<T> type, String json) {
         Type userListType = TypeToken.getParameterized(List.class, type).getType();
         return gson.fromJson(json, userListType);
+    }
+
+    public static <T> String convertObjectToString(T type) {
+        return gson.toJson(type);
     }
 }

@@ -1,4 +1,4 @@
-package core;
+package core.httpclient;
 
 
 import lombok.AllArgsConstructor;
