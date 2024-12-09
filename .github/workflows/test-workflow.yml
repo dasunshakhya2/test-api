@@ -9,12 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: setup JDK
-      - uses: actions/setup-java@v4.5.0
+        uses: actions/setup-java@v4.5.0
         with:
           java-version: '11'
           distribution: 'temurin'
           architecture: x64
       - name: Checkout
         uses: action/checkout@4
-      - name: run test
+      - name: execute tests
         run: mvn clean compile test
