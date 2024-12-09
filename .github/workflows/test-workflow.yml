@@ -17,4 +17,4 @@ jobs:
       - name: Checkout
         uses: action/checkout@4
       - name: run test
-      - run: mvn clean compile test
+        run: mvn clean compile test
