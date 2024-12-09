@@ -1,0 +1,8 @@
+name: Execute Unit tests
+on: [ push ]
+jobs:
+  execute_unit_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: action/checkout@4
